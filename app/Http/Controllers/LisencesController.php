@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Lisence;
 use Illuminate\Http\Request;
 
 class LisencesController extends Controller
@@ -13,7 +14,10 @@ class LisencesController extends Controller
    */
   public function index()
   {
-    return view('lisences.index');
+    $datas = Lisence::orderBy('id', 'DESC')->get();
+    return view('lisences.index', [
+      'datas' => $datas
+    ]);
   }
 
   /**
@@ -23,7 +27,7 @@ class LisencesController extends Controller
    */
   public function create()
   {
-    //
+    return view('lisences.create');
   }
 
   /**
@@ -34,7 +38,39 @@ class LisencesController extends Controller
    */
   public function store(Request $request)
   {
-    //
+
+    $request->validate([
+      'software_name' => 'required',
+      'category' => 'required',
+      'product_key' => 'required',
+      'licensed_to_name' => 'required',
+      'licensed_to_email' => 'required|email',
+      'supplier' => 'required',
+      'order_number' => 'required',
+      'purchase_cost' => 'required',
+      'purchase_date' => 'required',
+      'expiration_date' => 'required',
+      'termination_date' => 'required',
+      'purchase_order_number' => 'required',
+    ]);
+
+    $lisences = Lisence::create([
+      'software_name' => $request["software_name"],
+      'category' => $request["category"],
+      'product_key' => $request["product_key"],
+      'licensed_to_name' => $request["licensed_to_name"],
+      'licensed_to_email' => $request["licensed_to_email"],
+      'supplier' => $request["supplier"],
+      'order_number' => $request["order_number"],
+      'purchase_cost' => $request["purchase_cost"],
+      'purchase_date' => $request["purchase_date"],
+      'expiration_date' => $request["expiration_date"],
+      'termination_date' => $request["termination_date"],
+      'purchase_order_number' => $request["purchase_order_number"],
+      'notes' => $request["notes"]
+    ]);
+
+    return redirect('/lisences');
   }
 
   /**
@@ -79,6 +115,7 @@ class LisencesController extends Controller
    */
   public function destroy($id)
   {
-    //
+    Lisence::destroy($id);
+    return redirect('/lisences');
   }
 }

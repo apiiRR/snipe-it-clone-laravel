@@ -18,6 +18,8 @@
   <!-- Custom styles for this template-->
   <link href="{{ asset('admin/css/sb-admin-2.min.css') }}" rel="stylesheet">
 
+  @stack('css')
+
 </head>
 
 <body id="page-top">
@@ -54,25 +56,25 @@
         Interface
       </div>
 
-      <li class="nav-item {{ request()->routeIs('documents.index') || request()->routeIs('documents.create') ? 'active':'' }}">
-        <a class="nav-link" href="{{ route('documents.index') }}">
+      <li class="nav-item {{ request()->routeIs('components.index') || request()->routeIs('components.create') ? 'active':'' }}">
+        <a class="nav-link" href="{{ route('components.index') }}">
           <i class="fas fa-fw fa-folder-open"></i>
-          <span>Documents</span></a>
+          <span>Components</span></a>
       </li>
 
-      <li class="nav-item {{ request()->routeIs('accessories.index') ? 'active':'' }}">
+      <li class="nav-item {{ request()->routeIs('accessories.index') || request()->routeIs('accessories.create') ? 'active':'' }}">
         <a class="nav-link" href="{{ route('accessories.index') }}">
           <i class="fas fa-fw fa-store"></i>
           <span>Accessories</span></a>
       </li>
 
-      <li class="nav-item {{ request()->routeIs('lisences.index') ? 'active':'' }}">
+      <li class="nav-item {{ request()->routeIs('lisences.index') || request()->routeIs('lisences.create') ? 'active':'' }}">
         <a class="nav-link" href="{{ route('lisences.index') }}">
           <i class="fas fa-fw fa-bell"></i>
           <span>Lisences</span></a>
       </li>
 
-      <li class="nav-item {{ request()->routeIs('people.index') ? 'active':'' }}">
+      <li class="nav-item {{ request()->routeIs('people.index') || request()->routeIs('people.create') ? 'active':'' }}">
         <a class="nav-link" href="{{ route('people.index') }}">
           <i class="fas fa-fw fa-user-cog"></i>
           <span>People</span></a>
@@ -331,22 +333,17 @@
     </div>
   </div>
 
-  <!-- Bootstrap core JavaScript-->
-  <script src="{{ asset('admin/vendor/jquery/jquery.min.js') }}"></script>
-  <script src="{{ asset('admin/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
-  <!-- Core plugin JavaScript-->
-  <script src="{{ asset('admin/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
+   <!-- Bootstrap core JavaScript-->
+   <script src="{{ asset('admin/vendor/jquery/jquery.min.js') }}"></script>
+   <script src="{{ asset('admin/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
-  <!-- Custom scripts for all pages-->
-  <script src="{{ asset('admin/js/sb-admin-2.min.js') }}"></script>
+   <!-- Core plugin JavaScript-->
+   <script src="{{ asset('admin/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
 
-  <!-- Page level plugins -->
-  <script src="{{ asset('admin/vendor/chart.js/Chart.min.js') }}"></script>
-
-  <!-- Page level custom scripts -->
-  <script src="{{ asset('admin/js/demo/chart-area-demo.js') }}"></script>
-  <script src="{{ asset('admin/js/demo/chart-pie-demo.js') }}"></script>
+   <!-- Custom scripts for all pages-->
+   <script src="{{ asset('admin/js/sb-admin-2.min.js') }}"></script>
+  @stack('js')
 
 </body>
 

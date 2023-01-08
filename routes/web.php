@@ -13,11 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-  return view('index');
-});
+Route::get('/', 'DashboardController@index');
 
-Route::resource('documents', 'DocumentController');
+Route::resource('components', 'ComponentsController');
 
 Route::resource('accessories', 'AccessoriesController');
 

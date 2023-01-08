@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\People;
 use Illuminate\Http\Request;
 
 class PeopleController extends Controller
@@ -13,7 +14,10 @@ class PeopleController extends Controller
    */
   public function index()
   {
-    return view('people.index');
+    $datas = People::orderBy('id', 'DESC')->get();
+    return view('people.index', [
+      'datas' => $datas
+    ]);
   }
 
   /**
@@ -23,7 +27,7 @@ class PeopleController extends Controller
    */
   public function create()
   {
-    //
+    return view('people.create');
   }
 
   /**
@@ -34,7 +38,25 @@ class PeopleController extends Controller
    */
   public function store(Request $request)
   {
-    //
+    $request->validate([
+      'first_name' => 'required',
+      'last_name' => 'required',
+      'email' => 'required|email',
+      'phone' => 'required',
+      'title' => 'required',
+      'departmen' => 'required',
+    ]);
+
+    $people = People::create([
+      'first_name' => $request["first_name"],
+      'last_name' => $request["last_name"],
+      'email' => $request["email"],
+      'phone' => $request["phone"],
+      'title' => $request["title"],
+      'departmen' => $request["departmen"],
+    ]);
+
+    return redirect('/people');
   }
 
   /**
@@ -79,6 +101,7 @@ class PeopleController extends Controller
    */
   public function destroy($id)
   {
-    //
+    People::destroy($id);
+    return redirect('/people');
   }
 }

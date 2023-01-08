@@ -8,8 +8,8 @@
 @section('content')
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-      <h1 class="h3 mb-0 text-gray-800">Accessories</h1>
-      <a href="{{ route('accessories.create') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+      <h1 class="h3 mb-0 text-gray-800">Components</h1>
+      <a href="{{ route('components.create') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
               class="fas fa-download fa-plus-circle text-white-50"></i> Add New</a>
     </div>
 
@@ -21,13 +21,13 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Accessory Name</th>
+                            <th>Component Name</th>
                             <th>Category</th>
-                            <th>Model Number</th>
+                            <th>Quantity</th>
+                            <th>Serial</th>
                             <th>Order Number</th>
                             <th>Purchase Date</th>
-                            <th>Purchase Out</th>
-                            <th>Quantity</th>
+                            <th>Purchase Cost</th>
                             <th>Notes</th>
                             <th>Actions</th>
                         </tr>
@@ -39,16 +39,16 @@
                       @foreach ($datas as $data)
                       <tr>
                         <td>{{ $no++ }}</td>
-                        <td>{{ $data->accessory_name }}</td>
+                        <td>{{ $data->component_name }}</td>
                         <td>{{ $data->category }}</td>
-                        <td>{{ $data->model_number }}</td>
+                        <td>{{ $data->quantity }}</td>
+                        <td>{{ $data->serial }}</td>
                         <td>{{ $data->order_number }}</td>
                         <td>{{ $data->purchase_date }}</td>
-                        <td>{{ $data->purchase_out }}</td>
-                        <td>{{ $data->quantity }}</td>
+                        <td>{{ $data->purchase_cost }}</td>
                         <td>{{ $data->notes }}</td>
                         <td class="d-flex justify-content-center">
-                          <form id="delete" action="{{ route('accessories.destroy', ['accessory' => $data->id]) }}"
+                          <form id="delete" action="{{ route('components.destroy', ['component' => $data->id]) }}"
                               method="POST">
                               @csrf
                               @method('DELETE')

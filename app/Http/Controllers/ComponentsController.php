@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Components;
 use Illuminate\Http\Request;
 
-class DocumentController extends Controller
+class ComponentsController extends Controller
 {
   /**
    * Display a listing of the resource.
@@ -13,7 +14,10 @@ class DocumentController extends Controller
    */
   public function index()
   {
-    return view('documents.index');
+    $datas = Components::orderBy('id', 'DESC')->get();
+    return view('components.index', [
+      'datas' => $datas
+    ]);
   }
 
   /**
@@ -23,7 +27,7 @@ class DocumentController extends Controller
    */
   public function create()
   {
-    return view('documents.create');
+    return view('components.create');
   }
 
   /**
@@ -34,7 +38,28 @@ class DocumentController extends Controller
    */
   public function store(Request $request)
   {
-    //
+    $request->validate([
+      'component_name' => 'required',
+      'category' => 'required',
+      'quantity' => 'required',
+      'serial' => 'required',
+      'order_number' => 'required',
+      'purchase_date' => 'required',
+      'purchase_cost' => 'required',
+    ]);
+
+    $components = Components::create([
+      'component_name' => $request["component_name"],
+      'category' => $request["category"],
+      'quantity' => $request["quantity"],
+      'serial' => $request["serial"],
+      'order_number' => $request["order_number"],
+      'purchase_date' => $request["purchase_date"],
+      'purchase_cost' => $request["purchase_cost"],
+      'notes' => $request["notes"]
+    ]);
+
+    return redirect('/components');
   }
 
   /**
@@ -79,6 +104,7 @@ class DocumentController extends Controller
    */
   public function destroy($id)
   {
-    //
+    Components::destroy($id);
+    return redirect('/components');
   }
 }
